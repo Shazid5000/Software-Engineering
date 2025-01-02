@@ -1,0 +1,19 @@
+def load_complaints(self):
+    db = DBConnect()
+    complaints = db.fetch_complaints()
+
+    print("Fetched complaints:", complaints)  # Check the structure of the fetched data
+
+    # Clear existing items in the Treeview
+    for item in self.tree.get_children():
+        self.tree.delete(item)
+
+    # Insert complaints into the Treeview with complaint IDs as the item identifiers
+    for complaint in complaints:
+        print("Inserting complaint:", complaint)  # Verify the data format
+        # Use the complaint ID as the iid (item identifier) to reference in delete operations
+        self.tree.insert("", tk.END, iid=complaint.get('id'), values=(
+            complaint.get('name', 'N/A'),
+            complaint.get('gender', 'N/A'),
+            complaint.get('description', 'N/A')
+        ))

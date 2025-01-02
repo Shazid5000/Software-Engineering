@@ -1,0 +1,8 @@
+def delete_complaint(self, complaint_id):
+    try:
+        self.conn.execute("DELETE FROM complaints WHERE id=?", (complaint_id,))
+        self.conn.commit()
+        return True
+    except Exception as e:
+        print(f"Error deleting complaint: {e}")
+        return False
